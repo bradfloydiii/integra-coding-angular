@@ -1,13 +1,43 @@
 <div class="container container-fluid">
-  <h1>Angular Router Sample</h1>
-</div>
+  <h1>Integra Users</h1>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+  <nav>
+    <!-- <a
+      class="button"
+      routerLink="/user/list"
+      routerLinkActive="active-button"
+      ariaCurrentWhenActive="page"
+    > -->
+    <button mat-button>View Users</button>
+    <!-- </a> -->
+    &#160;|&#160;
+    <a
+      class="button"
+      routerLink="/user/create"
+      routerLinkActive="active-button"
+      ariaCurrentWhenActive="page"
+    >
+      Create User
+    </a>
+    &#160;|&#160;
+    <a
+      class="button"
+      routerLink="/user/update"
+      routerLinkActive="active-button"
+      ariaCurrentWhenActive="page"
+    >
+      Update User
+    </a>
+    &#160;|&#160;
+    <a
+      class="button"
+      routerLink="/user/delete"
+      routerLinkActive="active-button"
+      ariaCurrentWhenActive="page"
+    >
+      Delete User
+    </a>
+  </nav>
+</div>
 
 <router-outlet></router-outlet>

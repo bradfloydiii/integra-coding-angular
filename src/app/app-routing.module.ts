@@ -7,7 +7,8 @@ import { UserUpdateComponent } from './components/user-update/user-update.compon
 import { UserDeleteComponent } from './components/user-delete/user-delete.component';
 
 const routes: Routes = [
-  {path: 'user/list',  component: UserViewComponent},
+  {path: '', redirectTo: '/user/list', pathMatch: 'full'},
+  {path: 'user/list',   component: UserViewComponent},
   {path: 'user/create', component: UserCreateComponent},
   {path: 'user/update', component: UserUpdateComponent},
   {path: 'user/delete', component: UserDeleteComponent},
