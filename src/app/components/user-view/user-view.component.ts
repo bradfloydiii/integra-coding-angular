@@ -17,8 +17,8 @@ export class UserViewComponent {
     //this.users = this.userService.getUsers();
     this.userService.getUsers().subscribe(
       (users) => (this.users = users),
-      () => console.error(`Error retrieving contacts from ${this.userService.baseUrl}`),
-      () => console.log(`Retrieved contacts from ${this.userService.baseUrl}`)
+      () => console.error(`Error retrieving user(s) from ${this.userService.baseUrl}`),
+      () => console.log(`Retrieved user(s) from ${this.userService.baseUrl}`)
     );
   }
 }

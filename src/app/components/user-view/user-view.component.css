@@ -1,5 +1,5 @@
 
-header h3 {
+/* header h3 {
     color: var(--dark);
     width: 100%;
     padding: 1rem 0;
@@ -24,10 +24,10 @@ header h3 {
   .contact ul li {
     list-style-type: none;
     margin: 10px auto;
-  }
+  } */
   
   /* Media Queries */
-  @media (max-width: 1000px) {
+  /* @media (max-width: 1000px) {
     .contact {
       font-size: 1.3rem;
     }
@@ -51,5 +51,5 @@ header h3 {
       display: grid;
       grid-template-columns: 1fr;
     }
-  }
+  } */
   

@@ -13,33 +13,27 @@ export class UsersService {
   private users: IUsers[] = [
     {
       _id: '5de91c00d6b4d04e96ef44da',
-      index: 1,
-      firstName: 'Mcmahon',
-      lastName: 'Fulton',
-      company: 'ILLUMITY',
+      firstName: 'Bradley',
+      lastName: 'Floyd',
+      company: 'Kinetica',
       email: 'mcmahonfulton@illumity.com',
       phone: '+1 (814) 489-3373',
-      address: '676 Bainbridge Street, Abrams, Mississippi, 2652',
     },
     {
       _id: '5de91c00d6b4d04e96ef44da',
-      index: 2,
       firstName: 'Zander',
       lastName: 'Waldman',
-      company: 'ILLUMITY',
+      company: 'MRM',
       email: 'mcmahonfulton@illumity.com',
       phone: '+1 (814) 489-3373',
-      address: '676 Bainbridge Street, Abrams, Mississippi, 2652',
     },
     {
       _id: '5de91c00d6b4d04e96ef44da',
-      index: 3,
       firstName: 'Mike',
       lastName: 'Cotillo',
-      company: 'ILLUMITY',
+      company: '???',
       email: 'mcmahonfulton@illumity.com',
       phone: '+1 (814) 489-3373',
-      address: '676 Bainbridge Street, Abrams, Mississippi, 2652',
     },
   ];
 

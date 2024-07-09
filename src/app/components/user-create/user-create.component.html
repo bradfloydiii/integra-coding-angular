@@ -1,1 +1,69 @@
 <h3>Create User</h3>
+
+<section class="messages">
+  <div *ngIf="isValid" class="message">
+    <h3>Contact successfully added.</h3>
+  </div>
+  <div *ngIf="emptyFields" class="alert">
+    All fields are <strong>required</strong>.
+  </div>
+  <div *ngIf="invalidChars" class="alert">
+    Special characters <strong>not allowed</strong> in First Name and/or Last
+    name.
+  </div>
+  <div *ngIf="invalidEmail" class="alert">
+    Please enter a <strong>valid email</strong>.
+  </div>
+  <div *ngIf="invalidPhone" class="alert">
+    Please enter a <strong>valid phone number</strong>.
+  </div>
+</section>
+
+<section class="contact-form">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="col-3">
+      <input
+        type="text"
+        placeholder="First Name*"
+        formControlName="firstName"
+        required
+      />
+
+      <input
+        type="text"
+        placeholder="Last Name*"
+        formControlName="lastName"
+        required
+      />
+    </div>
+
+    <div class="col-2">
+      <input
+        type="text"
+        placeholder="Company*"
+        formControlName="company"
+        required
+      />
+
+      <input
+        type="email"
+        placeHolder="Email* (john@example.com)"
+        formControlName="email"
+        required
+      />
+    </div>
+    <div class="col-1">
+      <input
+        type="text"
+        placeholder="Phone* (10-digit)"
+        formControlName="phone"
+        minlength="10"
+        maxlength="10"
+        required
+      />
+    </div>
+    <div class="gap">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</section>
