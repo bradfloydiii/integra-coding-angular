@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'integra-coding';
+
+  ngOnInit() {
+    if (environment.production) {
+      console.log("We are running in production mode");
+      console.log(`baseUrl: ${environment.baseUrl}`);
+    } else {
+      console.log("We are running in development mode");
+      console.log(`baseUrl: ${environment.baseUrl}`);
+    }
+  }
+  
 }

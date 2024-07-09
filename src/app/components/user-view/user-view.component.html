@@ -1,1 +1,20 @@
 <h3>User List</h3>
+<header>
+  </header>
+  <section class="contacts">
+    <div *ngFor="let user of users" class="contact">
+      <ul>
+        <li>
+          <h3>{{ user.firstName + ' ' + user.lastName }}</h3>
+        </li>
+        <li>
+          <h4>
+            {{ user.company }}
+          </h4>
+        </li>
+        <li>{{ user.email }}</li>
+        <li>{{ user.phone }}</li>
+        <li>{{ user.address }}</li>
+      </ul>
+    </div>
+  </section>
