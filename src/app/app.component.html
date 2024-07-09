@@ -1,17 +1,19 @@
-<div class="container container-fluid">
+<div class="container">
   <h1>Integra Users</h1>
 
   <nav>
-    <!-- <a
+    <a
+      mat-button
       class="button"
       routerLink="/user/list"
       routerLinkActive="active-button"
       ariaCurrentWhenActive="page"
-    > -->
-    <button mat-button>View Users</button>
-    <!-- </a> -->
+    >
+      View Users
+    </a>
     &#160;|&#160;
     <a
+      mat-button
       class="button"
       routerLink="/user/create"
       routerLinkActive="active-button"
@@ -21,6 +23,7 @@
     </a>
     &#160;|&#160;
     <a
+      mat-button
       class="button"
       routerLink="/user/update"
       routerLinkActive="active-button"
@@ -30,6 +33,7 @@
     </a>
     &#160;|&#160;
     <a
+      mat-button
       class="button"
       routerLink="/user/delete"
       routerLinkActive="active-button"
@@ -38,6 +42,6 @@
       Delete User
     </a>
   </nav>
-</div>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>

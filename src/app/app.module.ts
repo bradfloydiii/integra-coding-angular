@@ -10,6 +10,8 @@ import { UserCreateComponent } from './components/user-create/user-create.compon
 import { UserUpdateComponent } from './components/user-update/user-update.component';
 import { UserDeleteComponent } from './components/user-delete/user-delete.component';
 
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,8 @@ import { UserDeleteComponent } from './components/user-delete/user-delete.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatButtonModule,
   ],
   providers: [UsersService],
   bootstrap: [AppComponent]
