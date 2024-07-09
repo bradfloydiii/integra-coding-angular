@@ -21,4 +21,12 @@ export class UserViewComponent {
       () => console.log(`Retrieved user(s) from ${this.userService.baseUrl}`)
     );
   }
+
+  deleteUser(id: string): void {
+    this.userService.deleteUser(id).subscribe(
+      () => (this.users = this.users.filter((u) => u._id !== id)),
+      () => console.error(`Error deleting user with id ${id}`),
+      () => console.log(`Deleted user with id ${id}`)
+    );
+  }
 }

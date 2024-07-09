@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUser, IUsers } from '../models/users';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,15 +12,15 @@ export class UsersService {
   // private users: IUsers[] = [];
   private users: IUsers[] = [
     {
-      _id: '5de91c00d6b4d04e96ef44da',
+      _id: '100',
       firstName: 'Bradley',
       lastName: 'Floyd',
-      company: 'Kinetica',
+      company: 'Kinetica.com',
       email: 'mcmahonfulton@illumity.com',
       phone: '+1 (814) 489-3373',
     },
     {
-      _id: '5de91c00d6b4d04e96ef44da',
+      _id: '200',
       firstName: 'Zander',
       lastName: 'Waldman',
       company: 'MRM',
@@ -28,7 +28,7 @@ export class UsersService {
       phone: '+1 (814) 489-3373',
     },
     {
-      _id: '5de91c00d6b4d04e96ef44da',
+      _id: '300',
       firstName: 'Mike',
       lastName: 'Cotillo',
       company: '???',
@@ -40,7 +40,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<IUsers[]> {
-    return from([this.users]);
+    return of(this.users);
     return this.http.get<IUsers[]>(`${this.baseUrl}`); // This is the correct line
   }
 
@@ -49,10 +49,10 @@ export class UsersService {
   }
 
   updateUser(user: IUsers): Observable<IUsers[]> {
-    return this.http.put<IUsers[]>(`${this.baseUrl}`, user);
+    return this.http.put<IUsers[]>(`${this.baseUrl}/update/${user._id}`, user);
   }
 
-  deleteUser(id: number): Observable<IUsers[]> {
-    return this.http.delete<IUsers[]>(`${this.baseUrl}/${id}`);
+  deleteUser(id: string): Observable<IUsers[]> {
+    return this.http.delete<IUsers[]>(`${this.baseUrl}/delete/${id}`);
   }
 }

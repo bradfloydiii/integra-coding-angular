@@ -1,6 +1,4 @@
-<!-- <h3>User List</h3> -->
-<header></header>
-<section class="contacts">
+<section class="user-view">
   <div *ngFor="let user of users" class="contact">
     <ul>
       <li>
@@ -14,5 +12,16 @@
       <li>{{ user.email }}</li>
       <li>{{ user.phone }}</li>
     </ul>
+    <a
+      mat-button
+      class="button"
+      [routerLink]="['/user/create', user]"
+      routerLinkActive="active-button"
+      ariaCurrentWhenActive="page">Update User</a>
+      &#160;|&#160;
+    <a
+      mat-button
+      class="button"
+      (click)="deleteUser(user._id)">Delete User</a>
   </div>
 </section>

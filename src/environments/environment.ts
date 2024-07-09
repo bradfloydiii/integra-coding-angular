@@ -1,5 +1,5 @@
 
 export const environment = {
     production: true,
-    baseUrl: `http://demo5838836.mockable.io/contact`,
+    baseUrl: `http://golang/api/v1/users`,
   };
