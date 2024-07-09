@@ -2,44 +2,9 @@
   <h1>Integra Users</h1>
 
   <nav>
-    <a
-      mat-button
-      class="button"
-      routerLink="/user/list"
-      routerLinkActive="active-button"
-      ariaCurrentWhenActive="page"
-    >
-      View Users
-    </a>
+    <a mat-button class="button" routerLink="/user/list"> View Users </a>
     &#160;|&#160;
-    <a
-      mat-button
-      class="button"
-      routerLink="/user/create"
-      routerLinkActive="active-button"
-      ariaCurrentWhenActive="page"
-    >
-      Create User
-    </a>
-    <!-- <a
-      mat-button
-      class="button"
-      routerLink="/user/update"
-      routerLinkActive="active-button"
-      ariaCurrentWhenActive="page"
-    >
-      Update User
-    </a>
-    &#160;|&#160;
-    <a
-      mat-button
-      class="button"
-      routerLink="/user/delete"
-      routerLinkActive="active-button"
-      ariaCurrentWhenActive="page"
-    >
-      Delete User
-    </a> -->
+    <a mat-button class="button" (click)="createUser()"> Create User </a>
   </nav>
 
   <router-outlet></router-outlet>

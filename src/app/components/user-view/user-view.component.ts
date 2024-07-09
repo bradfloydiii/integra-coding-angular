@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { IUsers } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -8,19 +9,26 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./user-view.component.css'],
 })
 export class UserViewComponent {
-
   users: IUsers[] = [];
 
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     //this.users = this.userService.getUsers();
     this.userService.getUsers().subscribe(
       (users) => (this.users = users),
-      () => console.error(`Error retrieving user(s) from ${this.userService.baseUrl}`),
+      () =>
+        console.error(
+          `Error retrieving user(s) from ${this.userService.baseUrl}`
+        ),
       () => console.log(`Retrieved user(s) from ${this.userService.baseUrl}`)
     );
   }
+
+  updateUser(user: IUsers): void {
+    this.router.navigate(['/user/create', {user: JSON.stringify(user)}]);
+  }
+
 
   deleteUser(id: string): void {
     this.userService.deleteUser(id).subscribe(

@@ -1,27 +1,21 @@
 <section class="user-view">
   <div *ngFor="let user of users" class="contact">
-    <ul>
-      <li>
-        <h3>{{ user.firstName + " " + user.lastName }}</h3>
-      </li>
-      <li>
-        <strong>
-          {{ user.company }}
-        </strong>
-      </li>
-      <li>{{ user.email }}</li>
-      <li>{{ user.phone }}</li>
-    </ul>
-    <a
-      mat-button
-      class="button"
-      [routerLink]="['/user/create', user]"
-      routerLinkActive="active-button"
-      ariaCurrentWhenActive="page">Update User</a>
-      &#160;|&#160;
-    <a
-      mat-button
-      class="button"
-      (click)="deleteUser(user._id)">Delete User</a>
+    <div class="user-container">
+      <div class="user-details">
+        <strong>{{ user.firstName + " " + user.lastName }}</strong>
+        <strong>{{ user.company }}</strong>
+        <span>{{ user.email }}</span>
+        <em>{{ user.phone }}</em>
+      </div>
+      <div class="user-actions">
+        <a mat-raised-button color="accent" (click)="updateUser(user)"
+          >Update User</a
+        >
+        &#160;&#160;
+        <a mat-raised-button color="warn" (click)="deleteUser(user._id)"
+          >Delete User</a
+        >
+      </div>
+    </div>
   </div>
 </section>

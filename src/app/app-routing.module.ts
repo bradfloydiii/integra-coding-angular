@@ -4,14 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
-import { UserDeleteComponent } from './components/user-delete/user-delete.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/user/list', pathMatch: 'full'},
-  {path: 'user/list',   component: UserViewComponent},
-  {path: 'user/create', component: UserCreateComponent},
-  {path: 'user/update', component: UserUpdateComponent},
-  {path: 'user/delete', component: UserDeleteComponent},
+  {path: 'user/list', title: 'User List',  component: UserViewComponent},
+  {path: 'user/create', title: 'Create User', component: UserCreateComponent},
+  // { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

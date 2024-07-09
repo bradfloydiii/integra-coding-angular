@@ -61,8 +61,16 @@
           required
         />
       </div>
-      <div class="gap">
-        <button type="submit">Submit</button>
+      <div class="buttons-group">
+        <div class="gap">
+          <button mat-raised-button color="accent" type="submit">
+            {{title}}
+          </button>
+        </div>
+        &#160; | &#160;
+        <div class="gap">
+          <button mat-raised-button color="accent" type="button" (click)="resetForm()">Reset</button>
+        </div>
       </div>
     </form>
   </section>

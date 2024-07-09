@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-create',
@@ -8,6 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UserCreateComponent {
   public userForm: FormGroup = new FormGroup({});
+  public userData: any = {};
+  public title: string = 'Create User';
 
   isValid = false;
 
@@ -17,9 +20,20 @@ export class UserCreateComponent {
   invalidZipCode = false;
   invalidChars = false;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.userData = this.route.snapshot.paramMap.get('user');
+    this.userData = JSON.parse(this.userData);
+  }
 
   ngOnInit(): void {
+    this.isValid = false;
+
+    this.emptyFields = false;
+    this.invalidEmail = false;
+    this.invalidPhone = false;
+    this.invalidZipCode = false;
+    this.invalidChars = false;
+
     this.userForm = new FormGroup({
       firstName: new FormControl('', [
         Validators.required,
@@ -37,6 +51,29 @@ export class UserCreateComponent {
         Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
       ]),
     });
+
+    if (this.userData) {
+      // rehydrate phone number and remove the special characters
+      if (this.userData.phone) {
+        this.userData.phone = this.userData.phone.replace(
+          /[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g,
+          ''
+        );
+        this.userData.phone = this.userData.phone.substring(1);
+      }
+
+      this.userForm.patchValue(this.userData);
+      this.title = 'Update User';
+    } else {
+      this.title = 'Create User';
+    }
+  }
+
+  resetForm() {
+    this.userData = null;
+    this.userForm.reset();
+    this.ngOnInit();
+    this.title = 'Create User';
   }
 
   get firstName() {
@@ -66,6 +103,7 @@ export class UserCreateComponent {
       const p1 = phoneValue.substring(0, 3);
       const p2 = phoneValue.substring(3, 6);
       const p3 = phoneValue.substring(6);
+      // const formattedPhone = `+1 (${p1})-${p2}-${p3}`;
       const formattedPhone = `+1 (${p1})-${p2}-${p3}`;
       // Assuming contactForm is a FormGroup and you want to update its phone field
       this.userForm.patchValue({ phone: formattedPhone });
@@ -100,6 +138,9 @@ export class UserCreateComponent {
       console.log(`Serialized data`, this.userForm.value);
 
       this.userForm.reset();
+      setTimeout(() => {
+        this.router.navigate(['/user/list']);
+      }, 2000);
       return;
     }
 

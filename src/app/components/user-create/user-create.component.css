@@ -2,6 +2,13 @@
     width: 620px;
   }
 
+  .buttons-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
 header h3 {
     color: var(--dark);
     width: 100%;
@@ -24,10 +31,11 @@ header h3 {
   
   .messages {
     margin-top: 1rem;
+    color: red;
   }
   
   .message {
-    color: var(--message);
+    color: green !important;
   }
   
   .gap {
