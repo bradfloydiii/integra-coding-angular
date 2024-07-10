@@ -1,6 +1,9 @@
 <section class="user-create">
   <section class="messages">
-    <div *ngIf="isValid" class="message">
+    <div *ngIf="isError" class="alert">
+      <h3>{{errorMessage}}</h3>
+    </div>
+    <div *ngIf="isValid && !isError" class="message">
       <h3>Contact successfully added.</h3>
     </div>
     <div *ngIf="emptyFields" class="alert">
@@ -64,12 +67,12 @@
       <div class="buttons-group">
         <div class="gap">
           <button mat-raised-button color="accent" type="submit">
-            {{title}}
+            {{submitBtnTitle}}
           </button>
         </div>
         &#160; | &#160;
         <div class="gap">
-          <button mat-raised-button color="accent" type="button" (click)="resetForm()">Reset</button>
+          <button mat-raised-button color="accent" type="button" (click)="resetUserForm()">Reset</button>
         </div>
       </div>
     </form>

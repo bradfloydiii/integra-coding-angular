@@ -12,19 +12,38 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Retrieves the list of users.
+   * @returns An observable of type IUsers[].
+   */
   getUsers(): Observable<IUsers[]> {
-    // return of(this.users);
     return this.http.get<IUsers[]>(`${this.apiUrl}`);
   }
 
-  createUser(user: IUser): Observable<IUsers[]> {
-    return this.http.post<IUsers[]>(`${this.apiUrl}`, user);
+  /**
+   * Creates a new user.
+   * @param formData The form data containing the user details.
+   * @returns An observable of type IUsers[].
+   */
+  createUser(formData: FormData): Observable<IUsers[]> {
+    return this.http.post<IUsers[]>(`${this.apiUrl}`, formData);
   }
 
-  updateUser(user: IUsers): Observable<IUsers[]> {
-    return this.http.put<IUsers[]>(`${this.apiUrl}/${user._id}`, user);
+  /**
+   * Updates an existing user.
+   * @param formData The form data containing the updated user details.
+   * @param id The ID of the user to update.
+   * @returns An observable of type IUsers[].
+   */
+  updateUser(formData: FormData, id: string): Observable<IUsers[]> {
+    return this.http.put<IUsers[]>(`${this.apiUrl}/${id}`, formData);
   }
 
+  /**
+   * Deletes a user.
+   * @param id The ID of the user to delete.
+   * @returns An observable of type IUsers[].
+   */
   deleteUser(id: string): Observable<IUsers[]> {
     return this.http.delete<IUsers[]>(`${this.apiUrl}/${id}`);
   }

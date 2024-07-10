@@ -11,21 +11,16 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserViewComponent {
   users: IUsers[] = [];
   isError = false;
+  errorMessage = '';
 
   constructor(private userService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
-    //this.users = this.userService.getUsers();
-    this.userService.getUsers().subscribe(
-      (users) => (this.users = users),
-      () => {
-        this.isError = true;
-        console.error(
-          `Error retrieving user(s) from ${this.userService.apiUrl}`
-        );
-      },
-      () => console.log(`Retrieved user(s) from ${this.userService.apiUrl}`)
-    );
+    this.userService.getUsers().subscribe({
+      next: (users) => this.users = users,
+      error: (error) => {this.isError = true; this.errorMessage = error?.message},
+      complete: () => console.info('Successfully fetched users.') 
+    });
   }
 
   updateUser(user: IUsers): void {
@@ -33,10 +28,6 @@ export class UserViewComponent {
   }
 
   deleteUser(id: string): void {
-    this.userService.deleteUser(id).subscribe(
-      () => (this.users = this.users.filter((u) => u._id !== id)),
-      () => console.error(`Error deleting user with id ${id}`),
-      () => console.log(`Deleted user with id ${id}`)
-    );
+    this.userService.deleteUser(id).subscribe((res) => {console.info(`${res}`)});
   }
 }
