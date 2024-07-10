@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { UserCreateComponent } from './components/user-create/user-create.component';
-import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/user/list', pathMatch: 'full'},

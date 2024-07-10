@@ -15,10 +15,10 @@ export class AppComponent {
   ngOnInit() {
     if (environment.production) {
       console.log('We are running in production mode');
-      console.log(`baseUrl: ${environment.baseUrl}`);
+      console.log(`apiUrl: ${environment.apiUrl}`);
     } else {
       console.log('We are running in development mode');
-      console.log(`baseUrl: ${environment.baseUrl}`);
+      console.log(`apiUrl: ${environment.apiUrl}`);
     }
   }
 

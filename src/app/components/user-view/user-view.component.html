@@ -1,4 +1,9 @@
 <section class="user-view">
+  <div class="messages">
+    <div *ngIf="isError" class="message">
+      <h3>Error retrieving users from server</h3>
+    </div>
+  </div>
   <div *ngFor="let user of users" class="contact">
     <div class="user-container">
       <div class="user-details">

@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseUrl: `http://golang/api/v1/users`,
+  apiUrl: 'http://localhost:1323/v1/user',
 };
 
 
