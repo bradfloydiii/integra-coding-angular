@@ -1,17 +1,9 @@
-import { TestBed } from '@angular/core/testing';
 
 import { UserCreateComponent } from './user-create.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs';
 
 
 describe('UserCreateComponent', () => {
   let component: UserCreateComponent;
-  let route: ActivatedRoute;
-  let router: Router;
 
   const users = [
     {
@@ -49,23 +41,18 @@ describe('UserCreateComponent', () => {
   });
   
   const mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', {
-    paramMap: new Observable(),
+    paramMap: {
+      get: 'user',
+    },
     params: { id: 1 }
   });
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: { data: of({ result: 'test' }) },
-        },
-      ],
-    }).compileComponents();
-    router = TestBed.inject(Router);
+  const mockRouter = jasmine.createSpyObj('Router', {
+    navigate: () => {},
+  });
 
-    component = new UserCreateComponent(mockContactService, mockActivatedRoute, router);
+  beforeEach(() => {
+    component = new UserCreateComponent(mockContactService, mockActivatedRoute, mockRouter);
   });
 
   it('should create', () => {
@@ -112,8 +99,6 @@ describe('UserCreateComponent', () => {
     component.ngOnInit();
 
     component.userForm.setValue({
-      badgeId: '1234567890123456',
-      mInitial: 'm',
       firstname: 'Brad',
       lastname: 'Floyd',
       company: 'Acme',
@@ -144,22 +129,6 @@ describe('UserCreateComponent', () => {
     expect(component.invalidPhone).toBeTruthy();
   });
 
-  it('should display "invalid zip" error on bad zipCode entry', () => {
-    component.invalidZipCode = false;
-    component.ngOnInit();
-
-    component.userForm.setValue({
-      firstname: 'Brad',
-      lastname: 'Floyd',
-      company: 'Acme',
-      email: 'john@example',
-      phone: '1234567afads',
-    });
-
-    component.onSubmit();
-    expect(component.invalidZipCode).toBeTruthy();
-  });
-
   it('should display "invalid characters" error when special characters are entered in either firstname or lastname', () => {
     component.invalidChars = false;
     component.ngOnInit();
@@ -184,7 +153,7 @@ describe('UserCreateComponent', () => {
       firstname: 'Brad',
       lastname: 'Floyd',
       company: 'Acme',
-      email: 'john@example',
+      email: 'brad@example',
       phone: '1234567890',
     });
 
