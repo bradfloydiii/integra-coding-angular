@@ -7,7 +7,7 @@
   <div *ngFor="let user of users" class="contact">
     <div class="user-container">
       <div class="user-details">
-        <strong>{{ user.firstName + " " + user.lastName }}</strong>
+        <strong>{{ user.firstname + " " + user.lastname }}</strong>
         <strong>{{ user.company }}</strong>
         <span>{{ user.email }}</span>
         <em>{{ user.phone }}</em>
@@ -17,7 +17,7 @@
           >Update User</a
         >
         &#160;&#160;
-        <a mat-raised-button color="warn" (click)="deleteUser(user._id)"
+        <a mat-raised-button color="warn" (click)="deleteUser(user.id)"
           >Delete User</a
         >
       </div>

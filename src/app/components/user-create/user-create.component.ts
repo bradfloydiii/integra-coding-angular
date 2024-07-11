@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IUsers } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -48,11 +49,11 @@ export class UserCreateComponent {
     this.invalidChars = false;
 
     this.userForm = new FormGroup({
-      firstName: new FormControl('', [
+      firstname: new FormControl('', [
         Validators.required,
         Validators.pattern('^[A-Za-z0-9]+$'),
       ]),
-      lastName: new FormControl('', [
+      lastname: new FormControl('', [
         Validators.required,
         Validators.pattern('^[A-Za-z0-9]+$'),
       ]),
@@ -66,6 +67,7 @@ export class UserCreateComponent {
     });
 
     if (this.userData) {
+      console.log(this.userData);
       this.rehydratePhoneNumber();
       this.userForm.patchValue(this.userData);
       this.submitBtnTitle = 'Update User';
@@ -101,12 +103,12 @@ export class UserCreateComponent {
     this.submitBtnTitle = 'Create User';
   }
 
-  get firstName() {
-    return this.userForm.get('firstName');
+  get firstname() {
+    return this.userForm.get('firstname');
   }
 
-  get lastName() {
-    return this.userForm.get('lastName');
+  get lastname() {
+    return this.userForm.get('lastname');
   }
 
   get company() {
@@ -176,7 +178,7 @@ export class UserCreateComponent {
       const formData = this.createFormData();
 
       if (this.userData) {
-        this.updateUser(formData, this.userData._id);
+        this.updateUser(formData, this.userData.id);
       } else {
         this.createUser(formData);
       }
@@ -201,7 +203,7 @@ export class UserCreateComponent {
         ? true
         : false;
     this.invalidChars =
-      this.firstName?.errors?.['pattern'] || this.lastName?.errors?.['pattern']
+      this.firstname?.errors?.['pattern'] || this.lastname?.errors?.['pattern']
         ? true
         : false;
   }
@@ -213,18 +215,17 @@ export class UserCreateComponent {
    */
   createFormData() {
     const formData = new FormData();
-    const firstName = this.firstName ? this.firstName.value : '';
-    const lastName = this.lastName ? this.lastName.value : '';
+    const firstname = this.firstname ? this.firstname.value : '';
+    const lastname = this.lastname ? this.lastname.value : '';
     const email = this.email ? this.email.value : '';
     const company = this.company ? this.company.value : '';
     const phone = this.phone ? this.phone.value : '';
 
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
+    formData.append('firstname', firstname);
+    formData.append('lastname', lastname);
     formData.append('email', email);
     formData.append('company', company);
     formData.append('phone', phone);
-
     return formData;
   }
 
@@ -234,14 +235,15 @@ export class UserCreateComponent {
    * @param {FormData} formData - The form data for the new user.
    */
   createUser(formData: FormData) {
-    this.userService.createUser(formData).subscribe({
-      next: (res) => console.info(res),
-      error: (error) => {
+    console.log(formData);
+    this.userService.createUser(formData).subscribe(
+      (res: IUsers[]) => console.info(res),
+      (error) => {
         this.isError = true;
         this.errorMessage = error?.message;
       },
-      complete: () => console.info('User successfully created'),
-    });
+      () => console.info('User creation complete')
+    );
   }
 
   /**
@@ -252,12 +254,12 @@ export class UserCreateComponent {
    */
   updateUser(formData: FormData, id: string) {
     this.userService.updateUser(formData, id).subscribe({
-      next: (res) => console.info(res),
+      next: (res: IUsers[]) => console.info(res),
       error: (error) => {
         this.isError = true;
         this.errorMessage = error?.message;
       },
-      complete: () => console.info('User successfully updated'),
+      complete: () => console.info('User update complete'),
     });
   }
 }

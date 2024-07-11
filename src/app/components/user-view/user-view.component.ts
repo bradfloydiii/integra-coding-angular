@@ -19,7 +19,6 @@ export class UserViewComponent {
     this.userService.getUsers().subscribe({
       next: (users) => this.users = users,
       error: (error) => {this.isError = true; this.errorMessage = error?.message},
-      complete: () => console.info('Successfully fetched users.') 
     });
   }
 
@@ -28,6 +27,9 @@ export class UserViewComponent {
   }
 
   deleteUser(id: string): void {
-    this.userService.deleteUser(id).subscribe((res) => {console.info(`${res}`)});
+    this.userService.deleteUser(id).subscribe({
+      error: (error) => {this.isError = true; this.errorMessage = error?.message},
+      complete: () => this.users = this.users.filter((user) => user.id !== id)
+    });
   }
 }
