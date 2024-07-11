@@ -1,4 +1,3 @@
-
 import { UserCreateComponent } from './user-create.component';
 
 describe('UserCreateComponent', () => {
@@ -38,11 +37,13 @@ describe('UserCreateComponent', () => {
       },
     },
   });
-  
+
   const mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', {
-    paramMap: {
-      get: 'user',
-    }
+    snapshot: {
+      paramMap: {
+        get: () => {return 'user'},
+      },
+    },
   });
 
   const mockRouter = jasmine.createSpyObj('Router', {
@@ -50,7 +51,11 @@ describe('UserCreateComponent', () => {
   });
 
   beforeEach(() => {
-    component = new UserCreateComponent(mockContactService, mockActivatedRoute, mockRouter);
+    component = new UserCreateComponent(
+      mockContactService,
+      mockActivatedRoute,
+      mockRouter
+    );
   });
 
   it('should create', () => {
