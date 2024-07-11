@@ -1,4 +1,5 @@
 
+import { fakeAsync, tick } from '@angular/core/testing';
 import { UserViewComponent } from './user-view.component';
 
 describe('UserViewComponent', () => {
@@ -53,4 +54,25 @@ describe('UserViewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call getUsers on init', () => {
+    component.ngOnInit();
+    
+    expect(mockContactService.getUsers).toHaveBeenCalled();
+  });
+
+  it('should call updateUser', () => {
+    component.updateUser(users[0]);
+
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/user/create', { user: JSON.stringify(users[0]) }]);
+  });
+
+  it('should call deleteUser', fakeAsync(() => {
+    component.deleteUser(users[0].id);
+
+    expect(mockContactService.deleteUser).toHaveBeenCalled();
+    tick();
+    expect(component.users).not.toContain(users[0]);
+  }));
+
 });
