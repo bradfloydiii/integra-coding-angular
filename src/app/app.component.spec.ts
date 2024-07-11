@@ -1,29 +1,29 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import copydeck from 'src/assets/properties/properties';
 
-xdescribe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
-  }));
+describe('AppComponent', () => {
+  let component: AppComponent;
 
-  xit('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  const mockRouter = jasmine.createSpyObj('Router', {
+    navigate: (dest: string) => {},
   });
 
-  xit(`should have as title 'integra-coding'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('integra-coding');
+  beforeEach(() => {
+    component = new AppComponent(mockRouter);
   });
 
-  xit('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('integra-coding app is running!');
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it(`should have as title 'User View'`, () => {
+    expect(component.title).toEqual(copydeck.responses.userView);
+  });
+
+  it(`should call ngOnInit have as title 'User View'`, () => {
+    component.ngOnInit();
+    expect(component.title).toEqual(copydeck.responses.userView);
   });
 });
