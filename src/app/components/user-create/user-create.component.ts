@@ -239,11 +239,11 @@ export class UserCreateComponent {
     console.log(formData);
     this.userService.createUser(formData).subscribe(
       (res: IUsers[]) => console.info(res),
-      (error) => {
+      () => {
         this.isError = true;
         this.errorMessage = copydeck.responses.userCreatedError;
       },
-      () => console.info('User creation complete')
+      () => console.info(copydeck.responses.userCreated)
     );
   }
 
