@@ -84,22 +84,18 @@ describe('UserCreateComponent', () => {
     component.ngOnInit();
 
     component.userForm.setValue({
-      id: 1,
       firstname: '',
-      lastName: 'Floyd',
+      lastname: 'Floyd',
       company: 'Acme',
       email: 'john@example.com',
       phone: '1234567890',
-      city: 'Detroit',
-      state: 'MI',
-      zipCode: '48197',
     });
 
     component.onSubmit();
     expect(component.emptyFields).toBeTruthy();
   });
 
-  xit('should display "invalid email" error on bad email entry', () => {
+  it('should display "invalid email" error on bad email entry', () => {
     component.invalidEmail = false;
     component.ngOnInit();
 
@@ -109,16 +105,13 @@ describe('UserCreateComponent', () => {
       company: 'Acme',
       email: 'john@',
       phone: '1234567890',
-      city: 'Detroit',
-      state: 'MI',
-      zipCode: '48197',
     });
 
     component.onSubmit();
     expect(component.invalidEmail).toBeTruthy();
   });
 
-  xit('should display "invalid phone" error on bad phone entry', () => {
+  it('should display "invalid phone" error on bad phone entry', () => {
     component.invalidPhone = false;
     component.ngOnInit();
 
@@ -134,7 +127,7 @@ describe('UserCreateComponent', () => {
     expect(component.invalidPhone).toBeTruthy();
   });
 
-  xit('should display "invalid characters" error when special characters are entered in either firstname or lastname', () => {
+  it('should display "invalid characters" error when special characters are entered in either firstname or lastname', () => {
     component.invalidChars = false;
     component.ngOnInit();
 
@@ -150,7 +143,7 @@ describe('UserCreateComponent', () => {
     expect(component.invalidChars).toBeTruthy();
   });
 
-  xit('should display "success" message if form is valid', () => {
+  it('should display "success" message if form is valid', () => {
     component.isValid = false;
     component.ngOnInit();
 
