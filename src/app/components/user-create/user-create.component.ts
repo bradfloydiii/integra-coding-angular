@@ -258,7 +258,7 @@ export class UserCreateComponent {
       next: (res: IUsers[]) => console.info(res),
       error: (error) => {
         this.isError = true;
-        this.errorMessage = error?.message;
+        this.errorMessage = copydeck.responses.userUpdatedError;
       },
       complete: () => console.info(copydeck.responses.userUpdated),
     });
