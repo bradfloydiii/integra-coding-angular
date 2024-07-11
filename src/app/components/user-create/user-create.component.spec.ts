@@ -1,4 +1,6 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserCreateComponent } from './user-create.component';
+import { ActivatedRoute } from '@angular/router';
 
 describe('UserCreateComponent', () => {
   let component: UserCreateComponent;
@@ -38,10 +40,10 @@ describe('UserCreateComponent', () => {
     },
   });
 
-  const mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', {
+  const mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', ['get'], {
     snapshot: {
       paramMap: {
-        get: () => {return 'user'},
+        get: () => JSON.stringify(users),
       },
     },
   });
