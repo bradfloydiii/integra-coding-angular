@@ -64,7 +64,7 @@ describe('UserCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should initialize the component', () => {
+  it('should initialize the component', () => {
     component.ngOnInit();
     expect(component.isValid).toBeFalse();
     expect(component.emptyFields).toBeFalse();
@@ -79,7 +79,7 @@ describe('UserCreateComponent', () => {
     expect(component.phone).toBeTruthy();
   });
 
-  xit('should display fields required error is any field is missing', () => {
+  it('should display fields required error is any field is missing', () => {
     component.emptyFields = false;
     component.ngOnInit();
 
