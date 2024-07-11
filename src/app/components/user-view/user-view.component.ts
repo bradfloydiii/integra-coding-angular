@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IUsers } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
+import copydeck from 'src/assets/properties/properties';
+
 
 @Component({
   selector: 'user-view',
@@ -13,12 +15,15 @@ export class UserViewComponent {
   isError = false;
   errorMessage = '';
 
+  updateUserTitle = copydeck.titles.userUpdate;
+  deleteUserTitle = copydeck.titles.userDelete;
+
   constructor(private userService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe({
       next: (users) => this.users = users,
-      error: (error) => {this.isError = true; this.errorMessage = error?.message},
+      error: () => {this.isError = true; this.errorMessage = copydeck.responses.databaseError},
     });
   }
 
@@ -28,7 +33,7 @@ export class UserViewComponent {
 
   deleteUser(id: string): void {
     this.userService.deleteUser(id).subscribe({
-      error: (error) => {this.isError = true; this.errorMessage = error?.message},
+      error: () => {this.isError = true; this.errorMessage = copydeck.responses.userDeletedError},
       complete: () => this.users = this.users.filter((user) => user.id !== id)
     });
   }

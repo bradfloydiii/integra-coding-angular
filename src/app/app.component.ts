@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import copydeck from 'src/assets/properties/properties';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,7 +9,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public title = 'Create User';
+  public title = copydeck.responses.userView;
+
+  userViewTitle = copydeck.titles.userView;
+  createUserTitle = copydeck.titles.userCreate;
 
   constructor(private router: Router) {}
 

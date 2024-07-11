@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUsers } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
+import copydeck from 'src/assets/properties/properties';
 
 @Component({
   selector: 'app-user-create',
@@ -16,7 +17,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class UserCreateComponent {
   public userForm: FormGroup = new FormGroup({});
   public userData: any = {};
-  public submitBtnTitle: string = 'Create User';
+  public submitBtnTitle: string = copydeck.titles.userCreate;
 
   isError = false;
   errorMessage = '';
@@ -70,7 +71,7 @@ export class UserCreateComponent {
       console.log(this.userData);
       this.rehydratePhoneNumber();
       this.userForm.patchValue(this.userData);
-      this.submitBtnTitle = 'Update User';
+      this.submitBtnTitle = copydeck.titles.userUpdate;
     }
   }
 
@@ -100,7 +101,7 @@ export class UserCreateComponent {
     this.userData = null;
     this.userForm.reset();
     this.ngOnInit();
-    this.submitBtnTitle = 'Create User';
+    this.submitBtnTitle = copydeck.titles.userCreate;
   }
 
   get firstname() {
@@ -259,7 +260,7 @@ export class UserCreateComponent {
         this.isError = true;
         this.errorMessage = error?.message;
       },
-      complete: () => console.info('User update complete'),
+      complete: () => console.info(copydeck.responses.userUpdated),
     });
   }
 }
