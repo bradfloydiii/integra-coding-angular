@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserCreateComponent } from './user-create.component';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, pipe } from 'rxjs';
 
 describe('UserCreateComponent', () => {
   let component: UserCreateComponent;
@@ -24,11 +25,13 @@ describe('UserCreateComponent', () => {
       },
     },
     createUser: {
+      pipe: () => {},
       subscribe: () => {
         return users;
       },
     },
     updateUser: {
+      pipe: () => {},
       subscribe: () => {
         return users;
       },
@@ -186,7 +189,21 @@ describe('UserCreateComponent', () => {
     expect(component.userData.phone).toEqual('1234567890');
   });
 
-  
+  xit('should submit the form if form is valid', () => {
+    component.isValid = false;
+    component.ngOnInit();
+
+    component.userForm.setValue({
+      firstname: 'Brad',
+      lastname: 'Floyd',
+      company: 'Acme',
+      email: 'brad@example',
+      phone: '1234567890',
+    });
+
+    component.onSubmit();
+    expect(component.isValid).toBeTruthy();
+  });
 
   xit('should display "success" message if form is valid', () => {
     component.isValid = false;
