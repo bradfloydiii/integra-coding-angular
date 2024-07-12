@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { IUsers } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 import copydeck from 'src/assets/properties/properties';
@@ -19,6 +20,7 @@ export class UserCreateComponent {
   public userData: any = {};
   public submitBtnTitle: string = copydeck.titles.userCreate;
 
+  destroyed = new Subject();
   isError = false;
   errorMessage = '';
 
@@ -68,11 +70,15 @@ export class UserCreateComponent {
     });
 
     if (this.userData) {
-      console.log(this.userData);
       this.rehydratePhoneNumber();
       this.userForm.patchValue(this.userData);
       this.submitBtnTitle = copydeck.titles.userUpdate;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed.next(null);
+    this.destroyed.complete();
   }
 
   /**
@@ -184,7 +190,6 @@ export class UserCreateComponent {
         this.createUser(formData);
       }
 
-      
       setTimeout(() => {
         if (!this.isError) {
           this.userForm.reset();
@@ -236,15 +241,17 @@ export class UserCreateComponent {
    * @param {FormData} formData - The form data for the new user.
    */
   createUser(formData: FormData) {
-    console.log(formData);
-    this.userService.createUser(formData).subscribe(
-      (res: IUsers[]) => console.info(res),
-      () => {
-        this.isError = true;
-        this.errorMessage = copydeck.responses.userCreatedError;
-      },
-      () => console.info(copydeck.responses.userCreated)
-    );
+    this.userService
+      .createUser(formData)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe({
+        next: (res: IUsers[]) => console.info(res),
+        error: () => {
+          this.isError = true;
+          this.errorMessage = copydeck.responses.userCreatedError;
+        },
+        complete: () => console.info(copydeck.responses.userCreated),
+      });
   }
 
   /**
@@ -254,13 +261,16 @@ export class UserCreateComponent {
    * @param {string} id - The ID of the user to update.
    */
   updateUser(formData: FormData, id: string) {
-    this.userService.updateUser(formData, id).subscribe({
-      next: (res: IUsers[]) => console.info(res),
-      error: (error) => {
-        this.isError = true;
-        this.errorMessage = copydeck.responses.userUpdatedError;
-      },
-      complete: () => console.info(copydeck.responses.userUpdated),
-    });
+    this.userService
+      .updateUser(formData, id)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe({
+        next: (res: IUsers[]) => console.info(res),
+        error: () => {
+          this.isError = true;
+          this.errorMessage = copydeck.responses.userUpdatedError;
+        },
+        complete: () => console.info(copydeck.responses.userUpdated),
+      });
   }
 }

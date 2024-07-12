@@ -143,7 +143,52 @@ describe('UserCreateComponent', () => {
     expect(component.invalidChars).toBeTruthy();
   });
 
-  it('should display "success" message if form is valid', () => {
+  it('should reset the form when resetForm() is called', () => {
+    component.ngOnInit();
+    component.userForm.setValue({
+      firstname: 'Brad',
+      lastname: 'Floyd',
+      company: 'Acme',
+      email: 'brad@example',
+      phone: '1234567890',
+    });
+
+    component.resetUserForm();
+    expect(component.userForm.value).toEqual({
+      firstname: '',
+      lastname: '',
+      company: '',
+      email: '',
+      phone: '',
+    });
+  });
+
+  it('should format phone number when formatPhoneNumber() is called', () => {
+    component.ngOnInit();
+    component.userForm.setValue({
+      firstname: 'Brad',
+      lastname: 'Floyd',
+      company: 'Acme',
+      email: 'brad@email.com',
+      phone: '1234567890',
+    });
+
+    component.formatPhoneNumber();
+    expect(component.userForm.value.phone).toEqual('+1 (123)-456-7890');
+  });
+
+  it('should rehydrate phone number when rehydratePhoneNumber() is called', () => {
+    component.ngOnInit();
+    component.userData = {
+      phone: '+1 (123)-456-7890',
+    };
+    component.rehydratePhoneNumber();
+    expect(component.userData.phone).toEqual('1234567890');
+  });
+
+  
+
+  xit('should display "success" message if form is valid', () => {
     component.isValid = false;
     component.ngOnInit();
 

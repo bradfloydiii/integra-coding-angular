@@ -5,6 +5,7 @@ export default {
     "userDeleted": "User deleted successfully.",
     "userCreated": "User created successfully.",
     "userUpdated": "User updated successfully.",
+    "userGetError": "Error getting users.",
     "userDeletedError": "Error deleting user.",
     "userCreatedError": "Error creating user.",
     "userUpdatedError": "Error updating user.",
