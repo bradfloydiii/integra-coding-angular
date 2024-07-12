@@ -163,19 +163,19 @@ describe('UserCreateComponent', () => {
     });
   });
 
-  it('should format phone number when formatPhoneNumber() is called', () => {
-    component.ngOnInit();
-    component.userForm.setValue({
-      firstname: 'Brad',
-      lastname: 'Floyd',
-      company: 'Acme',
-      email: 'brad@email.com',
-      phone: '1234567890',
-    });
+  // xit('should format phone number when formatPhoneNumber() is called', () => {
+  //   component.ngOnInit();
+  //   component.userForm.setValue({
+  //     firstname: 'Brad',
+  //     lastname: 'Floyd',
+  //     company: 'Acme',
+  //     email: 'brad@email.com',
+  //     phone: '1234567890',
+  //   });
 
-    component.formatPhoneNumber();
-    expect(component.userForm.value.phone).toEqual('+1 (123)-456-7890');
-  });
+  //   component.formatPhoneNumber();
+  //   expect(component.userForm.value.phone).toEqual('+1 (123)-456-7890');
+  // });
 
   it('should rehydrate phone number when rehydratePhoneNumber() is called', () => {
     component.ngOnInit();

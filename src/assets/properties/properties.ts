@@ -1,7 +1,7 @@
 export default {
   "responses": {
     "databaseError": "Error connecting to database.",
-    "userExists": "User already exists.",
+    "userExists": "User already exists. Please update the user email.",
     "userNotFound": "User not found.",
     "userDeleted": "User deleted successfully.",
     "userCreated": "User created successfully.",

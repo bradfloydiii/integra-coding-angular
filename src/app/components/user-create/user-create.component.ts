@@ -180,7 +180,7 @@ export class UserCreateComponent {
       this.invalidZipCode = false;
       this.invalidChars = false;
 
-      this.formatPhoneNumber();
+      // this.formatPhoneNumber();
 
       const formData = this.createFormData();
 
@@ -245,7 +245,7 @@ export class UserCreateComponent {
       .createUser(formData)
       .pipe(takeUntil(this.destroyed))
       .subscribe({
-        next: (res: IUsers[]) => console.info(res),
+        next: (res: IUsers[]) => (this.isError = false),
         error: (error) => {
           this.isError = true;
           this.errorMessage = (error.error.message === copydeck.responses.userExists) ? copydeck.responses.userExists : copydeck.responses.userCreatedError;
