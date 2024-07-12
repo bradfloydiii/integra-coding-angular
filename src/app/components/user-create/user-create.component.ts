@@ -246,9 +246,9 @@ export class UserCreateComponent {
       .pipe(takeUntil(this.destroyed))
       .subscribe({
         next: (res: IUsers[]) => console.info(res),
-        error: () => {
+        error: (error) => {
           this.isError = true;
-          this.errorMessage = copydeck.responses.userCreatedError;
+          this.errorMessage = (error.error.message === copydeck.responses.userExists) ? copydeck.responses.userExists : copydeck.responses.userCreatedError;
         },
         complete: () => console.info(copydeck.responses.userCreated),
       });
